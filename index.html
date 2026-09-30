@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>英语学习</title>
+    <style>
+      :root {
+        --paper: #f4efe6;
+        --ink: #1c1915;
+        --muted: #6e665c;
+        --line: #d9d1c4;
+        --accent: #243f36;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-height: 100%;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: "Avenir Next", "PingFang SC", "Hiragino Sans GB", sans-serif;
+      }
+      .page {
+        width: min(640px, calc(100% - 40px));
+        margin: 0 auto;
+        padding: 28px 0 80px;
+      }
+      .masthead {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 10px 14px;
+        margin-bottom: 28px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .brand {
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: inherit;
+      }
+      .nav {
+        display: flex;
+        gap: 16px;
+      }
+      .nav a {
+        color: var(--muted);
+        text-decoration: none;
+      }
+      h1 {
+        margin: 0 0 10px;
+        font-size: clamp(28px, 5vw, 40px);
+        font-weight: 560;
+        letter-spacing: -0.03em;
+      }
+      .lead {
+        margin: 0 0 28px;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+      .links {
+        display: grid;
+        gap: 16px;
+      }
+      .links a {
+        color: inherit;
+        text-decoration: none;
+      }
+      .links strong {
+        display: block;
+        margin-bottom: 4px;
+        font-size: 20px;
+        font-weight: 560;
+      }
+      .links span {
+        color: var(--muted);
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header class="masthead">
+        <span class="brand">英语学习</span>
+        <nav class="nav">
+          <a href="reading/index.html">阅读</a>
+          <a href="vocab/index.html">单词</a>
+        </nav>
+      </header>
+      <h1>从这里开始</h1>
+      <p class="lead" id="lead">点一项，页面开在旁边。</p>
+      <div class="links">
+        <a href="reading/index.html"><strong>阅读</strong><span>看本期文摘。打开原文后讨论，补口语和写作。</span></a>
+        <a href="vocab/index.html"><strong>单词</strong><span>背单词，跟踪进度。</span></a>
+      </div>
+    </div>
+    <script>
+      fetch("/api/status", { cache: "no-store" })
+        .then((response) => {
+          const type = response.headers.get("content-type") || "";
+          if (!response.ok || !type.includes("json")) throw new Error("static");
+        })
+        .catch(() => {
+          const lead = document.getElementById("lead");
+          if (lead) lead.textContent = "阅读和单词。每个人的进度记在自己的浏览器里。";
+        });
+      document.querySelectorAll("a[href]").forEach((link) => {
+        link.addEventListener("click", (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          window.location.assign(new URL(link.getAttribute("href"), window.location.href).href);
+        });
+      });
+    </script>
+  </body>
+</html>

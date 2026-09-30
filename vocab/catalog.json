@@ -1,0 +1,56 @@
+{
+  "active": "cet6-ielts",
+  "lists": {
+    "cet6-ielts": {
+      "id": "cet6-ielts",
+      "name": "单词",
+      "aliases": [
+        "单词",
+        "六级+雅思",
+        "四级",
+        "六级",
+        "雅思",
+        "托福",
+        "cet4",
+        "cet6",
+        "ielts",
+        "toefl",
+        "合并",
+        "combo"
+      ],
+      "file": "decks/cet6-ielts.jsonl",
+      "level": "CET-4+CET-6+IELTS+TOEFL",
+      "default_subset": "all",
+      "subsets": {
+        "all": {
+          "label": "全部",
+          "any_tags": []
+        },
+        "cet4": {
+          "label": "四级",
+          "any_tags": [
+            "cet4"
+          ]
+        },
+        "cet6": {
+          "label": "六级",
+          "any_tags": [
+            "cet6"
+          ]
+        },
+        "ielts": {
+          "label": "雅思",
+          "any_tags": [
+            "ielts"
+          ]
+        },
+        "toefl": {
+          "label": "托福",
+          "any_tags": [
+            "toefl"
+          ]
+        }
+      }
+    }
+  }
+}
